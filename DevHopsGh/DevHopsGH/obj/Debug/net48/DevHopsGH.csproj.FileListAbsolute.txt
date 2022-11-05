@@ -1,0 +1,11 @@
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\DevHopsGH.gha
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\DevHopsGH.pdb
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\Newtonsoft.Json.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.csproj.AssemblyReference.cache
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.AssemblyInfoInputs.cache
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.AssemblyInfo.cs
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.csproj.CoreCompileInputs.cache
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.csproj.CopyComplete
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.gha
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.pdb
