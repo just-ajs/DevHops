@@ -38,7 +38,15 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
         lanes: laneData
       }
 
-    return <div>{tasks.length}</div>
+    return (
+        <>
+        {boardData.lanes.map((lane) => (
+            <div key={`lane-${lane.id}`} className='w-full h-full flex bg-light rounded-md shadow-sm'>
+                {lane.id}
+            </div>
+        ))}
+        </>
+    )
 }
 
 type Card = {

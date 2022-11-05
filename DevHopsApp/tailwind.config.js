@@ -6,6 +6,11 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
+    colors: {
+      pale: "#EFF2F2",
+      light: "#FCFCFC",
+      brand: "#4285F4",
+    },
     extend: {
       height: {
         vh: '100vh',
