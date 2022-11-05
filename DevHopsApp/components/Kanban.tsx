@@ -1,13 +1,15 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
+import Board from 'react-trello'
+import type { Task } from '../types'
 
-export const Kanban = (): React.ReactElement => {
-    const [value, setValue] = useState(2)
+type KanbanProps = {
+    tasks: Task[]
+}
 
-    useEffect(() => {
-        setValue(4)
-    }, [])
+export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
+    const query = useQuery({ queryKey: ['todos'], queryFn: getTodos })
 
-    return <h1>{value}</h1>
+    return <Board data={} />
 }
