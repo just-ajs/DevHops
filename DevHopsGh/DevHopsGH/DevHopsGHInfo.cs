@@ -3,11 +3,11 @@ using Grasshopper.Kernel;
 using System;
 using System.Drawing;
 
-namespace DevHopsGh
+namespace DevHopsGH
 {
-    public class DevHopsGhInfo : GH_AssemblyInfo
+    public class DevHopsGHInfo : GH_AssemblyInfo
     {
-        public override string Name => "DevHopsGh";
+        public override string Name => "DevHopsGH";
 
         //Return a 24x24 pixel bitmap to represent this GHA library.
         public override Bitmap Icon => null;
@@ -15,7 +15,7 @@ namespace DevHopsGh
         //Return a short string describing the purpose of this GHA library.
         public override string Description => "";
 
-        public override Guid Id => new Guid("C428A30A-61EC-4656-811B-03476437DFEE");
+        public override Guid Id => new Guid("0FD29E58-7724-4B7D-99C4-16FD0E9FD470");
 
         //Return a string identifying you or your company.
         public override string AuthorName => "";
