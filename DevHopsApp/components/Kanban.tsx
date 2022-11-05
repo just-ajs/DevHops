@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import Board from 'react-trello'
 import type { Task } from '../types'
 import { useQuery } from '@tanstack/react-query'
 import { fetchTasks } from '../api'
@@ -11,8 +10,7 @@ type KanbanProps = {
 }
 
 export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
-    // const { data } = useQuery({ queryKey: ['workitem'], queryFn: fetchTasks })
-    const data: Task[] = []
+    const { data } = useQuery({ queryKey: ['workitem'], queryFn: fetchTasks, initialData: tasks })
 
     const groups: { [key in Task['status']]: Card[] } = {
         todo: [],
@@ -40,7 +38,7 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
         lanes: laneData
       }
 
-    return <Board data={boardData} />
+    return <div>{tasks.length}</div>
 }
 
 type Card = {
