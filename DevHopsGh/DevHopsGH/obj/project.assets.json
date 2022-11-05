@@ -1,0 +1,175 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.8": {
+      "Grasshopper/7.13.21348.13001": {
+        "type": "package",
+        "dependencies": {
+          "RhinoCommon": "[7.13.21348.13001]"
+        },
+        "compile": {
+          "lib/net48/GH_IO.dll": {},
+          "lib/net48/Grasshopper.dll": {}
+        },
+        "runtime": {
+          "lib/net48/_._": {}
+        },
+        "build": {
+          "build/Grasshopper.targets": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "RhinoCommon/7.13.21348.13001": {
+        "type": "package",
+        "compile": {
+          "lib/net48/Eto.dll": {},
+          "lib/net48/Rhino.UI.dll": {},
+          "lib/net48/RhinoCommon.dll": {}
+        },
+        "runtime": {
+          "lib/net48/_._": {}
+        },
+        "build": {
+          "build/RhinoCommon.targets": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Grasshopper/7.13.21348.13001": {
+      "sha512": "XoxWouU2mzZAmj4kRP/ZqsKG+7e6Q+NBBitJSK/uxjuV8vNsGK2K19GW5ptDjjPuhd7GBI00KSB8Q1+JYFjELA==",
+      "type": "package",
+      "path": "grasshopper/7.13.21348.13001",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Grasshopper.targets",
+        "grasshopper.7.13.21348.13001.nupkg.sha512",
+        "grasshopper.nuspec",
+        "grasshopper.png",
+        "lib/net48/GH_IO.XML",
+        "lib/net48/GH_IO.dll",
+        "lib/net48/Grasshopper.dll",
+        "lib/net48/Grasshopper.xml"
+      ]
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "RhinoCommon/7.13.21348.13001": {
+      "sha512": "JQdaNw61ddBqIe08E9O4N/grwrN1hjDHcYW7tWylwCZyFR7SepoCD4NS+6LN6+oSQhNbhLi9Bf+hQOFYFdRAEA==",
+      "type": "package",
+      "path": "rhinocommon/7.13.21348.13001",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Eto-LICENSE.txt",
+        "build/RhinoCommon.targets",
+        "lib/net48/Eto.dll",
+        "lib/net48/Eto.xml",
+        "lib/net48/Rhino.UI.dll",
+        "lib/net48/RhinoCommon.XML",
+        "lib/net48/RhinoCommon.dll",
+        "rhinocommon.7.13.21348.13001.nupkg.sha512",
+        "rhinocommon.nuspec",
+        "rhinocommon.png"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.8": [
+      "Grasshopper >= 7.13.21348.13001",
+      "Newtonsoft.Json >= 13.0.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\jszychowska\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\jszychowska\\source\\DevHops\\DevHopsGh\\DevHopsGH\\DevHopsGH.csproj",
+      "projectName": "DevHopsGH",
+      "projectPath": "C:\\Users\\jszychowska\\source\\DevHops\\DevHopsGh\\DevHopsGH\\DevHopsGH.csproj",
+      "packagesPath": "C:\\Users\\jszychowska\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jszychowska\\source\\DevHops\\DevHopsGh\\DevHopsGH\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\jszychowska\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net48"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net48": {
+        "targetAlias": "net48",
+        "dependencies": {
+          "Grasshopper": {
+            "include": "Compile, Build",
+            "target": "Package",
+            "version": "[7.13.21348.13001, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.1, )"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

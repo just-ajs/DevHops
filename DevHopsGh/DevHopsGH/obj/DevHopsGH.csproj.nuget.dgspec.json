@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\jszychowska\\source\\DevHops\\DevHopsGh\\DevHopsGH\\DevHopsGH.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\jszychowska\\source\\DevHops\\DevHopsGh\\DevHopsGH\\DevHopsGH.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\jszychowska\\source\\DevHops\\DevHopsGh\\DevHopsGH\\DevHopsGH.csproj",
+        "projectName": "DevHopsGH",
+        "projectPath": "C:\\Users\\jszychowska\\source\\DevHops\\DevHopsGh\\DevHopsGH\\DevHopsGH.csproj",
+        "packagesPath": "C:\\Users\\jszychowska\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jszychowska\\source\\DevHops\\DevHopsGh\\DevHopsGH\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\jszychowska\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "Grasshopper": {
+              "include": "Compile, Build",
+              "target": "Package",
+              "version": "[7.13.21348.13001, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

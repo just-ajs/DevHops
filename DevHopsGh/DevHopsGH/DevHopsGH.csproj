@@ -3,13 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <Version>1.0</Version>
-    <Title>DevHopsGh</Title>
-    <Description>Description of DevHopsGh</Description>
+    <Title>DevHopsGH</Title>
+    <Description>Description of DevHopsGH</Description>
     <TargetExt>.gha</TargetExt>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="Grasshopper" Version="7.13.21348.13001" IncludeAssets="compile;build" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   
   <PropertyGroup Condition="$(Configuration) == 'Debug' AND $([MSBuild]::IsOSPlatform(Windows))">
