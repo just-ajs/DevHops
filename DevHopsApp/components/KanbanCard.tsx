@@ -1,12 +1,13 @@
-import React, { useRef, useState} from 'react'
+import React, { useEffect, useRef, useState} from 'react'
 import Draggable from 'react-draggable'
-import type { WorkItem, WorkItemStatus } from '../types'
+import type { StatusUpdate, WorkItem, WorkItemStatus } from '../types'
 import { StatusDot } from './StatusDot'
+import { postStatusUpdate, putWorkItem } from '../api'
 
 type KanbanCardProps = {
     item: WorkItem
     gridWidth: number
-    onUpdateData: (callback: (items: WorkItem[]) => WorkItem[]) => void
+    onUpdateData: () => void
 }
 
 export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): React.ReactElement => {
@@ -14,6 +15,12 @@ export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): 
     const [ showComments, setShowComments ] = useState(item.statusUpdates.length > 0)
     const cardRef = useRef<HTMLDivElement>(null)
     const textInput = useRef<HTMLInputElement>(null)
+
+    const internalItem = useRef(item)
+
+    useEffect(() => {
+        internalItem.current = item
+    }, [item])
 
     const statusKeys: WorkItemStatus[] = [
         'todo',
@@ -29,27 +36,58 @@ export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): 
             const currentIndex = statusKeys.findIndex((stat) => stat === getWorkItemStatus(item))
             const nextIndex = currentIndex + delta
 
-            onUpdateData((current: WorkItem[]) => {
-                const currentStatus = statusKeys[currentIndex]
-                const nextStatus = statusKeys[nextIndex]
+            const nextStatus = statusKeys[nextIndex]
 
-                const copy = [...current]
+            internalItem.current.status = nextStatus
 
-                const copyTask = copy.find((t) => t.workItemId === item.workItemId)
+            console.log(nextStatus)
 
-                if (!copyTask) {
-                    return current
-                }
+            const now = new Date()
 
-                if (!copyTask.statusUpdates[0]) {
-                    copyTask.status = nextStatus
-                    return copy
-                }
+            const nextStatusUpdate: StatusUpdate = {
+                statusUpdateId: crypto.randomUUID(),
+                    status: nextStatus,
+                    updateTime: now.toISOString(),
+                    comment: textInput.current?.value
+            }
 
-                copyTask.statusUpdates[0].status = nextStatus
-
-                return copy
+            if (nextStatusUpdate.comment) {
+                postStatusUpdate(item.workItemId, nextStatusUpdate)
+            .then(() => {
+                return putWorkItem(internalItem.current)
             })
+            .then(() => {
+                onUpdateData()
+            })
+            } else {
+                putWorkItem(internalItem.current).then(() => {
+                    onUpdateData()
+                })
+            }
+
+
+
+            // onUpdateData((current: WorkItem[]) => {
+            //     const currentStatus = statusKeys[currentIndex]
+
+
+            //     const copy = [...current]
+
+            //     const copyTask = copy.find((t) => t.workItemId === item.workItemId)
+
+            //     if (!copyTask) {
+            //         return current
+            //     }
+
+            //     if (!copyTask.statusUpdates[0]) {
+            //         copyTask.status = nextStatus
+            //         return copy
+            //     }
+
+            //     copyTask.statusUpdates[0].status = nextStatus
+
+            //     return copy
+            // })
 
         }}>
             <div ref={cardRef} className='w-full p-2 mb-3 flex flex-col justify-start rounded-sm bg-light shadow-md'>
@@ -84,7 +122,12 @@ export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): 
                         ))}
                         <form className='w-full' onSubmit={(e) => {
                             e.preventDefault()
-                            console.log('DD')
+
+                            if (!textInput.current) {
+                                return
+                            }
+
+                            console.log(textInput.current.value)
                         }}>
                         <input ref={textInput} className='mt-1 h-8 pl-2 pr-2 w-full bg-medium rounded-md font-sans text-md text-slate' placeholder={"Submit a new comment..."} type="text" />
                         </form>
@@ -96,7 +139,7 @@ export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): 
 }
 
 const getWorkItemStatus = (item: WorkItem): WorkItemStatus => {
-    return item.statusUpdates.sort((a, b) => (a.updateTime < b.updateTime) ? -1 : ((a.updateTime > b.updateTime) ? 1 : 0)).reverse().find((update) => !!update.status)?.status ?? item.status ?? 'todo'
+    return  item.status ?? item.statusUpdates.sort((a, b) => (a.updateTime < b.updateTime) ? -1 : ((a.updateTime > b.updateTime) ? 1 : 0)).reverse().find((update) => !!update.status)?.status ?? 'todo'
 }
 
 const getFirstWorkItemImage = (item: WorkItem): string | null => {
