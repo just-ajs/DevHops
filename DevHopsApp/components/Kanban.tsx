@@ -59,6 +59,7 @@ export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactEle
             return
         }
 
+        refetch()
         setGridWidth(window.innerWidth / 5)
       }, [])
 
