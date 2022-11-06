@@ -54,8 +54,13 @@ namespace DevHopsGH.Components
             {
                 if (tasks[i].statusUpdates.Count > 0)
                 {
-                    var localStatus = tasks[i].statusUpdates[0].status;
-                    tasks[i].status = localStatus;
+                    //var localStatus = tasks[i].statusUpdates[0].status;
+                    //tasks[i].status = localStatus;
+
+                    var sortedStatuses = tasks[i].statusUpdates.OrderByDescending(x => x.updateTime).First();
+
+
+                    tasks[i].status = sortedStatuses.status;
                 }
             }
 

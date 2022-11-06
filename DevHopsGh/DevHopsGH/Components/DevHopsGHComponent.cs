@@ -24,7 +24,7 @@ namespace DevHopsGH
         /// </summary>
         public DevHopsGHComponent()
           : base("DevHopsGH", "DevHops", "Connector of Grasshopper to Kanban board",
-            "DevHops", "DevHops")
+            "DevHops", "Get")
         {
         }
 
@@ -45,7 +45,7 @@ namespace DevHopsGH
             // Use the pManager object to register your output parameters.
             // Output parameters do not have default values, but they too must have the correct access type.
             pManager.AddTextParameter("Task Status", "Status", "Task status", GH_ParamAccess.item);
-            pManager.AddTextParameter("Comments", "Comments", "Task comments", GH_ParamAccess.item);
+            pManager.AddTextParameter("Comments", "Comments", "Task comments", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -72,23 +72,12 @@ namespace DevHopsGH
             }
 
             // read json
-            var jsonFilePath = AppConstants.jsonFilePath;
-            var streamReader = new StreamReader(jsonFilePath);
-            var jsonFile = streamReader.ReadToEnd();
+            //var jsonFilePath = AppConstants.jsonFilePath;
+            //var streamReader = new StreamReader(jsonFilePath);
+            //var jsonFile = streamReader.ReadToEnd();
+            //List<Task> tasks = JsonConvert.DeserializeObject<List<Task>>(jsonFile);
 
-
-
-            List<Task> tasks = JsonConvert.DeserializeObject<List<Task>>(jsonFile);
-            // find id
-
-            Task task = tasks.Find(t => t.workItemId == id);
-            // return status
-
-
-
-            // return comments
-            string status = task != null ? task.status.ToString() : "empty";
-
+            //Task task = tasks.Find(t => t.workItemId == id);
             //var lastComment = task.statusUpdates[task.statusUpdates.Count - 1].comment;
             //List<string> comments = task != null ? task.comments : new List<string> {"no comments"};
 
@@ -96,11 +85,29 @@ namespace DevHopsGH
             var response = b.GetWorkItemById(id);
 
             Task deserialize = JsonConvert.DeserializeObject<Task>(response);
+
+            if (deserialize.statusUpdates.Count > 0)
+            {
+                var sortedStatuses = deserialize.statusUpdates.OrderByDescending(x => x.updateTime).First();
+
+
+                deserialize.status = sortedStatuses.status;
+            }
+
+
+            var comments = deserialize.statusUpdates.Select(x => x.comment).ToList();
+            var time = deserialize.statusUpdates.Select(x => x.updateTime).ToList();
+
+            List<string> prints = new List<string>();
+            for (int i = 0; i < comments.Count(); i++)
+            {
+                prints.Add($"{time[i]} : {comments[i]}");
+            }
             var lastComment = "bla";
 
             // Finally assign the spiral to the output parameter.
-            DA.SetData(0, status);
-            DA.SetData(1, lastComment);
+            DA.SetData(0, deserialize.status);
+            DA.SetDataList(1, prints);
         }
 
 
