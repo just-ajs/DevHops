@@ -88,19 +88,16 @@ namespace DevHopsGH.Components
 
             WorkItemUpdate workItemUpdate = new WorkItemUpdate();
             workItemUpdate.workitemId = id;
-            workItemUpdate.timestamp = DateTime.Now.ToString();
-            workItemUpdate.username = Environment.UserName;
-
+            workItemUpdate.updateTime = DateTime.Now;
+            workItemUpdate.statusUpdateId = Guid.NewGuid().ToString();
             if (comment != String.Empty)
             {
                 workItemUpdate.comment = comment;
             }
 
-            Status myStatus;
-            Enum.TryParse(status, out myStatus);
-            workItemUpdate.status = myStatus;
+            workItemUpdate.status = status;
 
-            if (sendScreenshot) workItemUpdate.image = imageString;
+
 
             string sendUpdateJson = System.Text.Json.JsonSerializer.Serialize(workItemUpdate);
             BoardConnector boardConnector = new BoardConnector();

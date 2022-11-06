@@ -18,8 +18,7 @@ namespace DevHopsGH
 
         public string assignee { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public Status status { get; set; }
+        public string status { get; set; }
 
         public List<StatusUpdate> statusUpdates { get; set; }
     }
