@@ -5,7 +5,7 @@
          "description": "Task description here",
          "test" : "passed",
          "assignee": "Jo",
-         "status": "Todo",
+         "status": "Done",
          "statusUpdates": [
           {
              "statusUpdateId": "de08daf4-5d70-11ed-9b6b-0242ac120005",
