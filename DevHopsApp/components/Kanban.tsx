@@ -5,6 +5,8 @@ import type { WorkItem, WorkItemStatus, StatusUpdate } from '../types'
 import { useQuery } from '@tanstack/react-query'
 import Draggable from 'react-draggable';
 import { KanbanCard } from './KanbanCard';
+import { StatusDot } from './StatusDot';
+import { fetchWorkItems } from '../api'
 
 type KanbanProps = {
     workItems: WorkItem[]
@@ -12,9 +14,9 @@ type KanbanProps = {
 }
 
 export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactElement => {
-    // const { data, refetch } = useQuery({ queryKey: ['workitem'], queryFn: fetchTasks, initialData: tasks })
+    const { data, refetch } = useQuery({ queryKey: ['workitem'], queryFn: fetchWorkItems, initialData: workItems, retry: 1, refetchInterval: 5000, refetchOnMount: false, refetchOnWindowFocus: false })
 
-    const [data, setData] = useState(workItems)
+    // const [data, setData] = useState(workItems)
 
     const titles: { [key in WorkItemStatus]: string } = {
         todo: 'TODO',
@@ -57,6 +59,7 @@ export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactEle
             return
         }
 
+        refetch()
         setGridWidth(window.innerWidth / 5)
       }, [])
 
@@ -65,14 +68,21 @@ export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactEle
         {boardData.lanes.map((lane, i) => (
             <div key={`lane-${lane.id}`} className='w-full h-full p-2 flex flex-col bg-medium rounded-sm shadow-md'>
                 <div className='w-full mt-1 mb-2 flex flex-col justify-start items-start'>
-                    <div className='w-full flex pr-2 pl-2 justify-between items-center'>
-                        <h2 className='font-sans font-semibold text-md text-slate'>{titles[lane.title as WorkItemStatus]}</h2>
+                    <div className='w-full flex pr-2 pl-2 justify-start items-center'>
+                        <StatusDot status={lane.title as any} size="lg" />
+                        <h2 className='ml-2 font-sans font-semibold text-md text-slate flex-grow'>{titles[lane.title as WorkItemStatus]}</h2>
                         <svg width={14} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#888888" d="M120 256c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm160 0c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm104 56c-30.9 0-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56s-25.1 56-56 56z"/></svg>
                     </div>
                 </div>
                 <div className='w-full flex-grow flex flex-col justify-start items-center'>
                 {lane.cards.map((item, j) => (
-                    <KanbanCard  key={`task-card-${item.workItemId}`} item={item} gridWidth={gridWidth} onUpdateData={(callback) => setData((current) => callback(current))} />
+                    <KanbanCard  key={`task-card-${item.workItemId}`} item={item} gridWidth={gridWidth} onUpdateData={(callback) => {
+                        const newData = callback(data)
+
+                        // Post to API
+
+                        // Refetch
+                    }} />
                 ))}
                 </div>
 

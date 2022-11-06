@@ -1,0 +1,10 @@
+{
+  "workItemId": "f7399577-5d79-22ed-9b6a-0242ac120a02",
+  "title": "Update master definition outputs",
+  "description": "Setup nice gradient for the geometry",
+  "test": "passed",
+  "assignee": "Anders",
+  "status": "Review",
+  "statusUpdates": [
+  ]
+}

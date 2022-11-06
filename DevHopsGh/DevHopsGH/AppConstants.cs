@@ -10,9 +10,13 @@ namespace DevHopsGH
 {
     public static class AppConstants
     {
-        public static string jsonFilePath = @"C:\Users\jszychowska\Dropbox\devhops\jsons\kanban-board.json";
-        public static string imageFolder = @"C:\Users\jszychowska\Dropbox\devhops\images\";
+        //public static string jsonFilePath = @"C:\Users\jszychowska\source\DevHops\Mockup\data.json";
+        //public static string imageFolder = @"C:\Users\jszychowska\Dropbox\devhops\images\";
         public static string getWorkItemUrl = @"http://localhost:5296/api/WorkItems/";
         public static string sendUpdateUrl = @"http://localhost:5296/api/StatusUpdates";
+        public static string addWorkItemUrl = @"http://localhost:5296/api/WorkItems";
+        public static string getWorkItemsUrl = @"http://localhost:5296/api/WorkItems";
+        public static string frontEndServer = @"http://google.com";
+
     }
 }

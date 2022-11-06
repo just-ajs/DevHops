@@ -10,11 +10,12 @@ namespace DevHopsGH
 {
     public class WorkItemUpdate
     {
-        public string workitemId { get; set; }
-        public string timestamp { get; set; }
-        public string username { get; set; }
+        public string statusUpdateId { get; set; }
+        public DateTime updateTime { get; set; }
         public string comment { get; set; }
-        public Status status { get; set; }
-        public string image { get; set; }
+        public string status { get; set; }
+
+        public string workitemId { get; set; }
     }
+
 }

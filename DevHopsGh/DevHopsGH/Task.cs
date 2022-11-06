@@ -11,19 +11,16 @@ namespace DevHopsGH
 {
     public class Task
     {
-        public string id { get; set; }
+        public string workItemId { get; set; }
 
         public string title { get; set; }
+        public string description { get; set; }
 
-        public string username { get; set; }
+        public string assignee { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public Status status { get; set; }
+        public string status { get; set; }
 
-        public List<string> comments { get; set; }
-
-        public List<string> images { get; set; }
-
+        public List<StatusUpdate> statusUpdates { get; set; }
     }
 
     public enum Status
@@ -33,5 +30,12 @@ namespace DevHopsGH
         Review,
         ChangeRequested,
         Done
+    }
+
+    public class StatusUpdate
+    {
+        public string comment { get; set; }
+        public string status { get; set; }
+        public string updateTime { get; set; }
     }
 }
