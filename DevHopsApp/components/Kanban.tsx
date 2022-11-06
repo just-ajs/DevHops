@@ -11,7 +11,9 @@ type KanbanProps = {
 }
 
 export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
-    const { data } = useQuery({ queryKey: ['workitem'], queryFn: fetchTasks, initialData: tasks })
+    // const { data, refetch } = useQuery({ queryKey: ['workitem'], queryFn: fetchTasks, initialData: tasks })
+
+    const [data, setData] = useState(tasks)
 
     const titles: { [key in Task['status']]: string } = {
         todo: 'TODO',
@@ -20,6 +22,14 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
         changerequested: 'Change Requested',
         done: 'Done'
     }
+
+    const statusKeys: Task['status'][] = [
+        'todo',
+        'inprogress',
+        'review',
+        'changerequested',
+        'done'
+    ]
 
     const groups: { [key in Task['status']]: Card[] } = {
         todo: [],
@@ -82,9 +92,29 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
                 <div className='w-full flex-grow pl-4 pr-4 flex flex-col justify-start items-center'>
                 {lane.cards.map((card, j) => (
                     <Draggable key={`task-card-${card.id}`} grid={[gridWidth - 4, 1]} onStop={(e, d) => {
-                        console.log(Math.round(d.lastX / gridWidth))
+                        const delta = Math.round(d.lastX / gridWidth)
+                        const currentIndex = statusKeys.findIndex((stat) => stat === card.status)
+                        const nextIndex = currentIndex + delta
+
+                        setData((current) => {
+                            const currentStatus = statusKeys[currentIndex]
+                            const nextStatus = statusKeys[nextIndex]
+
+                            const copy = [...current]
+
+                            const copyTask = copy.find((t) => t.id.toString() === card.id)
+
+                            if (!copyTask) {
+                                return current
+                            }
+
+                            copyTask.status = nextStatus
+
+                            return copy
+                        })
+
                     }}>
-                        <div className='w-full p-4 rounded-md bg-slate shadow-sm'>
+                        <div className='w-full p-4 mb-4 rounded-md bg-slate shadow-md'>
                             {card.title}
                         </div>
                     </Draggable>
@@ -100,6 +130,7 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
 type Card = {
     id: string
     title: string
+    status: Task['status']
     description: string
     label: string
 }
@@ -108,6 +139,7 @@ const taskToCard = (task: Task): Card => {
     return {
         id: task.id.toString(),
         title: task.title,
+        status: task.status,
         description: '',
         label: task.title
     }
