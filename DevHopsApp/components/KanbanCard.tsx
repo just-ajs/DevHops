@@ -78,7 +78,7 @@ export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): 
                                 <div className='ml-2 mr-2'>
                                 <StatusDot status={status.status} size='sm' />
                                     </div>
-                                    <p className="font-sans text-xs text-slate flex-grow whitespace-nowrap overflow-hidden">{status?.comment ?? status.status}</p>
+                                    <p className="font-sans text-xs text-slate whitespace-nowrap overflow-hidden">{status?.comment?.substring(0, 40) ?? status.status}</p>
                             </div>
                         ))}
                         <form className='w-full' onSubmit={(e) => {
@@ -95,9 +95,9 @@ export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): 
 }
 
 const getWorkItemStatus = (item: WorkItem): WorkItemStatus => {
-    return item.statusUpdates.find((update) => !!update.status)?.status ?? item.status ?? 'todo'
+    return item.statusUpdates.sort((a, b) => (a.updateTime < b.updateTime) ? -1 : ((a.updateTime > b.updateTime) ? 1 : 0)).reverse().find((update) => !!update.status)?.status ?? item.status ?? 'todo'
 }
 
 const getFirstWorkItemImage = (item: WorkItem): string | null => {
-    return item.statusUpdates.find((update) => !!update.image)?.image?.imageData ?? null
+    return item.statusUpdates.sort((a, b) => (a.updateTime < b.updateTime) ? -1 : ((a.updateTime > b.updateTime) ? 1 : 0)).reverse().find((update) => !!update.image)?.image?.imageData ?? null
 }
