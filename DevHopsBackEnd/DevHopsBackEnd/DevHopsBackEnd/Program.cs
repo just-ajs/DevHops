@@ -1,5 +1,6 @@
 using DevHopsBackEnd.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,17 +16,20 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<DevHopsDbContext>();
-    dbContext.Database.Migrate();
-    dbContext.Database.EnsureCreated();
-    // use context
-}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<DevHopsDbContext>();
+        dbContext.Database.EnsureDeleted();
+        dbContext.Database.Migrate();
+        dbContext.Database.EnsureCreated();
+        // use context
+    }
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
