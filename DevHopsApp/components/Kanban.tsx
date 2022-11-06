@@ -57,7 +57,7 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
     return (
         <>
         {boardData.lanes.map((lane, i) => (
-            <div key={`lane-${lane.id}`} className='w-full h-full flex bg-light rounded-md overflow-hidden shadow-md'>
+            <div key={`lane-${lane.id}`} className='w-full h-full flex flex-col bg-light rounded-md overflow-hidden shadow-md'>
                 <div className='w-full pl-4 pr-4 h-24 flex flex-col justify-start items-start'>
                     <div className={`w-full h-1 mt-6 pl-4 pr-4 rounded-full bg-brand ${opacities[i]}`} />
                     <div className="w-full mt-2 flex justify-center items-center">
@@ -67,11 +67,13 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
                         <h2 className='font-sans font-semibold text-lg text-slate'>{titles[lane.title  as Task['status']]}</h2>
                     </div>
                     <div className={`w-full h-1 mt-2 pl-4 pr-4 rounded-full bg-brand ${opacities[i]}`} />
-
-
                 </div>
-                <div>
-
+                <div className='w-full flex-grow pl-4 pr-4 flex flex-col justify-start items-center'>
+                {lane.cards.map((card, j) => (
+                    <div key={`task-card-${card.id}`} className='w-full p-4 rounded-md bg-slate shadow-sm'>
+                        {card.title}
+                    </div>
+                ))}
                 </div>
 
             </div>
