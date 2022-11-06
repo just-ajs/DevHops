@@ -1,19 +1,23 @@
 export type WorkItem = {
-    id: string,
+    workItemId: string,
     title: string,
-    testpassed: boolean,
+    test: "passed" | "failed" | string,
     description: string,
     assignee: string,
+    status?: WorkItemStatus
     statusUpdates: StatusUpdate[]
 }
 
-export type WorkItemStatus = 'todo' | 'inprogress' | 'review' | 'changerequested' | 'done'
+export type WorkItemStatus = 'todo' | 'inprogress' | 'review' | 'changerequested' | 'done' | string
 
 export type StatusUpdate = {
-    id: string,
-    timestamp: string,
-    username: string,
+    statusUpdateId: string,
+    updateTime: string,
     status: WorkItemStatus,
     comment?: string
-    image?: string
+    image?: {
+        id: number,
+        imageTitle: string
+        imageData: string
+    }
 }
