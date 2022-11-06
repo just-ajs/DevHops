@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import Draggable from 'react-draggable';
 import { KanbanCard } from './KanbanCard';
 import { StatusDot } from './StatusDot';
+import { fetchWorkItems } from '../api'
 
 type KanbanProps = {
     workItems: WorkItem[]
@@ -13,9 +14,9 @@ type KanbanProps = {
 }
 
 export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactElement => {
-    // const { data, refetch } = useQuery({ queryKey: ['workitem'], queryFn: fetchTasks, initialData: tasks })
+    const { data, refetch } = useQuery({ queryKey: ['workitem'], queryFn: fetchWorkItems, initialData: workItems, retry: 1, refetchInterval: 5000, refetchOnMount: false, refetchOnWindowFocus: false })
 
-    const [data, setData] = useState(workItems)
+    // const [data, setData] = useState(workItems)
 
     const titles: { [key in WorkItemStatus]: string } = {
         todo: 'TODO',
@@ -74,7 +75,13 @@ export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactEle
                 </div>
                 <div className='w-full flex-grow flex flex-col justify-start items-center'>
                 {lane.cards.map((item, j) => (
-                    <KanbanCard  key={`task-card-${item.workItemId}`} item={item} gridWidth={gridWidth} onUpdateData={(callback) => setData((current) => callback(current))} />
+                    <KanbanCard  key={`task-card-${item.workItemId}`} item={item} gridWidth={gridWidth} onUpdateData={(callback) => {
+                        const newData = callback(data)
+
+                        // Post to API
+
+                        // Refetch
+                    }} />
                 ))}
                 </div>
 
