@@ -2,10 +2,10 @@
 
 import React, { use, useState, useCallback } from 'react'
 import Image from 'next/image'
-import '../globals.css'
-import { fetchWorkItems } from '../api'
-import { Kanban, KanbanContainer } from '../components'
-import { StatusUpdate } from '../types'
+import '../../globals.css'
+import { fetchWorkItems } from '../../api'
+import { Kanban, KanbanContainer } from '../../components'
+import { StatusUpdate } from '../../types'
 
 const Page = (): React.ReactElement => {
     const workItems = use(fetchWorkItems())

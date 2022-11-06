@@ -89,12 +89,14 @@ namespace DevHopsGH
             // return comments
             string status = task != null ? task.status.ToString() : "empty";
 
-            var lastComment = task.statusUpdates[task.statusUpdates.Count - 1].comment;
+            //var lastComment = task.statusUpdates[task.statusUpdates.Count - 1].comment;
             //List<string> comments = task != null ? task.comments : new List<string> {"no comments"};
 
             var b = new BoardConnector();
-           // var response = b.GetWorkItemById(id);
+            var response = b.GetWorkItemById(id);
 
+            Task deserialize = JsonConvert.DeserializeObject<Task>(response);
+            var lastComment = "bla";
 
             // Finally assign the spiral to the output parameter.
             DA.SetData(0, status);

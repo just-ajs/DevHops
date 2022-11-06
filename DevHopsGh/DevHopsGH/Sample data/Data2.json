@@ -1,0 +1,10 @@
+{
+  "workItemId": "f7399523-5d79-11ed-9b6a-0242ac120a02",
+  "title": "Hackathon presentation",
+  "description": "Present DevOps project",
+  "test": "passed",
+  "assignee": "Everyone",
+  "status": "Inprogress",
+  "statusUpdates": [
+  ]
+}

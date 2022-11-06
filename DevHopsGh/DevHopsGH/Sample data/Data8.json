@@ -1,0 +1,10 @@
+{
+  "workItemId": "ea4952b8-5d79-11ed-9b6a-024bac120002",
+  "title": "Develop Pattern",
+  "description": "Generate Pattern using panel faces as input",
+  "test": "passed",
+  "assignee": "Jo",
+  "status": "Todo",
+  "statusUpdates": [
+  ]
+}

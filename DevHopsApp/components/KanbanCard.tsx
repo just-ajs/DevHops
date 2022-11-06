@@ -12,6 +12,7 @@ type KanbanCardProps = {
 export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): React.ReactElement => {
 
     const [ showComments, setShowComments ] = useState(item.statusUpdates.length > 0)
+    const cardRef = useRef<HTMLDivElement>(null)
     const textInput = useRef<HTMLInputElement>(null)
 
     const statusKeys: WorkItemStatus[] = [
@@ -23,7 +24,7 @@ export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): 
     ]
 
     return (
-        <Draggable cancel='no-drag' grid={[gridWidth - 4, 1]} bounds={{ top: 0 }}  onStop={(e, d) => {
+        <Draggable nodeRef={cardRef} cancel='no-drag' grid={[gridWidth - 4, 1]} bounds={{ top: 0 }}  onStop={(e, d) => {
             const delta = Math.round(d.lastX / gridWidth)
             const currentIndex = statusKeys.findIndex((stat) => stat === getWorkItemStatus(item))
             const nextIndex = currentIndex + delta
@@ -51,7 +52,7 @@ export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): 
             })
 
         }}>
-            <div className='w-full p-2 mb-3 flex flex-col justify-start rounded-sm bg-light shadow-md'>
+            <div ref={cardRef} className='w-full p-2 mb-3 flex flex-col justify-start rounded-sm bg-light shadow-md'>
                 <div className='w-full flex justify-between items-center'>
                     <h3 className='font-sans text-slate'>{item.title}</h3>
                     <svg width={14} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#0CA678" d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>

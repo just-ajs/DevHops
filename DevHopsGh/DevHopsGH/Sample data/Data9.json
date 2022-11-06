@@ -1,0 +1,24 @@
+{
+  "workItemId": "df63e25a-5d79-11ed-9b6a-0242ac120002",
+  "title": "Panelize Surface Scopes",
+  "description": "Generate Panels for Each scope, output path reflecting Scope, Column and Sequence (Bottom to Top). Indicate using color scheme",
+  "test": "passed",
+  "assignee": "Jo",
+  "status": "ChangeRequested",
+  "statusUpdates": [
+    {
+      "statusUpdateId": "de08daf4-5d70-11ed-9b6a-0242bcs20005",
+      "updateTime": "2022-11-07T09:20:07.079Z",
+      "comment": "First prototype",
+      "status": "Todo",
+      "workItemId": "df63e25a-5d79-11ed-9b6a-0242ac120002"
+    },
+    {
+      "statusUpdateId": "de08daf4-5d70-11ed-9b6a-0242aa120001",
+      "updateTime": "2022-11-07T09:22:22.079Z",
+      "comment": "Please update data structure and indicate colour scheme.",
+      "status": "ChangeRequested",
+      "workItemId": "df63e25a-5d79-11ed-9b6a-0242ac120002"
+    }
+  ]
+}

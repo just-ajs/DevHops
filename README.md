@@ -18,8 +18,8 @@ This project addresses this issue by proposing a workflow where  Grasshopper scr
 
 ## Getting Started
 ### Grasshopper Plugin (DevHopsGh)
-1. Open in Visual Studio 2022 and build. 
-2. Copy the .dll files your Rhino Grasshopper Components folder.
+1. Copy the .dll and .gha files from `C\DevHops\DevHopsGh\Plugin` folder into your Rhino Grasshopper Components folder.
+2. Open in Visual Studio 2022 and build. 
 
 ### Backend (DevOpsBackEnd)
 1. Open in Visual Studio 2022 and run in debug mode to deploy the back-end.

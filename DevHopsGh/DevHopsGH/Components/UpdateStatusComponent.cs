@@ -17,7 +17,7 @@ namespace DevHopsGH.Components
         /// </summary>
         public UpdateStatusComponent()
           : base("UpdateStatusComponent", "Update status","Update task component",
-              "DevHops", "DevHops")
+              "DevHops", "Send")
         {
         }
 
@@ -58,49 +58,42 @@ namespace DevHopsGH.Components
             if (!DA.GetData(2, ref sendScreenshot)) return;
             if (!DA.GetData(3, ref comment)) return;
 
+
             // post method, id and status
             //send status
-            string filepath = @"C:\Users\jszychowska\Dropbox\devhops\images\image.jpeg";
+            //string filepath = @"C:\Users\jszychowska\Dropbox\devhops\images\image.jpeg";
 
-            string imageString = String.Empty;
+            //string imageString = String.Empty;
             
             //read folder images
-            if (sendScreenshot)
-            {
-                using (Image image = Image.FromFile(filepath))
-                {
-                    using (MemoryStream m = new MemoryStream())
-                    {
-                        image.Save(m, image.RawFormat);
-                        byte[] imageBytes = m.ToArray();
+            //if (sendScreenshot)
+            //{
+            //    using (Image image = Image.FromFile(filepath))
+            //    {
+            //        using (MemoryStream m = new MemoryStream())
+            //        {
+            //            image.Save(m, image.RawFormat);
+            //            byte[] imageBytes = m.ToArray();
 
-                        // Convert byte[] to Base64 String
-                        string base64String = Convert.ToBase64String(imageBytes);
-                        imageString = base64String;
+            //            // Convert byte[] to Base64 String
+            //            string base64String = Convert.ToBase64String(imageBytes);
+            //            imageString = base64String;
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
 
-
-            var username = Environment.UserName;
-            // post image, status
 
             WorkItemUpdate workItemUpdate = new WorkItemUpdate();
             workItemUpdate.workitemId = id;
-            workItemUpdate.timestamp = DateTime.Now.ToString();
-            workItemUpdate.username = Environment.UserName;
-
+            workItemUpdate.updateTime = DateTime.Now;
+            workItemUpdate.statusUpdateId = Guid.NewGuid().ToString();
             if (comment != String.Empty)
             {
                 workItemUpdate.comment = comment;
             }
 
-            Status myStatus;
-            Enum.TryParse(status, out myStatus);
-            workItemUpdate.status = myStatus;
-
-            if (sendScreenshot) workItemUpdate.image = imageString;
+            workItemUpdate.status = status;
 
             string sendUpdateJson = System.Text.Json.JsonSerializer.Serialize(workItemUpdate);
             BoardConnector boardConnector = new BoardConnector();
@@ -116,7 +109,7 @@ namespace DevHopsGH.Components
             {
                 var assembly = System.Reflection.Assembly.GetExecutingAssembly();
                 {
-                    var resourceName = assembly.GetManifestResourceNames().Single(n => n.EndsWith("Icon_transparent.png"));
+                    var resourceName = assembly.GetManifestResourceNames().Single(n => n.EndsWith("Icon_green.png"));
                     var stream = assembly.GetManifestResourceStream(resourceName);
                     if (stream != null) return new Bitmap(stream);
                 }

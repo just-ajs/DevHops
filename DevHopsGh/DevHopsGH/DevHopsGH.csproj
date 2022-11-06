@@ -10,12 +10,34 @@
 	
   <ItemGroup>
     <None Remove="Icons\Icon.png" />
+    <None Remove="Icons\Icon_green.png" />
     <None Remove="Icons\Icon_transparent.png" />
+    <None Remove="Sample data\Data1.json" />
+    <None Remove="Sample data\Data10.json" />
+    <None Remove="Sample data\Data2.json" />
+    <None Remove="Sample data\Data3.json" />
+    <None Remove="Sample data\Data4.json" />
+    <None Remove="Sample data\Data5.json" />
+    <None Remove="Sample data\Data6.json" />
+    <None Remove="Sample data\Data7.json" />
+    <None Remove="Sample data\Data8.json" />
+    <None Remove="Sample data\Data9.json" />
   </ItemGroup>
 	
   <ItemGroup>
     <EmbeddedResource Include="Icons\Icon.png" />
+    <EmbeddedResource Include="Icons\Icon_green.png" />
     <EmbeddedResource Include="Icons\Icon_transparent.png" />
+    <EmbeddedResource Include="Sample data\Data1.json" />
+    <EmbeddedResource Include="Sample data\Data10.json" />
+    <EmbeddedResource Include="Sample data\Data2.json" />
+    <EmbeddedResource Include="Sample data\Data3.json" />
+    <EmbeddedResource Include="Sample data\Data4.json" />
+    <EmbeddedResource Include="Sample data\Data5.json" />
+    <EmbeddedResource Include="Sample data\Data6.json" />
+    <EmbeddedResource Include="Sample data\Data7.json" />
+    <EmbeddedResource Include="Sample data\Data8.json" />
+    <EmbeddedResource Include="Sample data\Data9.json" />
   </ItemGroup>
   
   <ItemGroup>
