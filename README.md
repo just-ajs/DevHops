@@ -1,4 +1,4 @@
-![DevHops](./assets/DevHops.png)
+![DevHops](./Assets/DevHops.png)
 
 # DevHops
 DevHops is a workflow and toolkit for organizing Rhino Grasshopper scripts with [Hops](https://developer.rhino3d.com/guides/compute/hops-component/) and [Kanban](https://en.wikipedia.org/wiki/Kanban_board) boards.
