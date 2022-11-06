@@ -22,11 +22,11 @@ This project addresses this issue by proposing a workflow where  Grasshopper scr
 1. Open in Visual Studio 2022 and build. 
 2. Copy the .dll files your Rhino Grasshopper Components folder.
 
-### DevOpsApp
+### Backend (DevOpsBackEnd)
 1. Open in Visual Studio 2022 and run in debug mode to deploy the back-end.
 2. The backend will be running to `localhost:5296`.
 
-### DevOpsApp
+### Frontend DevOpsApp
 1. Run the NextJS webapp with `npm run start`
 2. The app is hosted on `localhost:3000`.
 
