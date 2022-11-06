@@ -117,7 +117,7 @@ export const KanbanCard = ({ item, gridWidth, onUpdateData }: KanbanCardProps): 
                                 <div className='ml-2 mr-2'>
                                 <StatusDot status={status.status} size='sm' />
                                     </div>
-                                    <p className="font-sans text-xs text-slate whitespace-nowrap overflow-hidden">{status?.comment?.substring(0, 30) ?? status.status}</p>
+                                    <p className="font-sans text-xs text-slate whitespace-nowrap overflow-hidden">{status?.comment?.substring(0, 25) ?? status.status}</p>
                             </div>
                         ))}
                         <form className='w-full' onSubmit={(e) => {
