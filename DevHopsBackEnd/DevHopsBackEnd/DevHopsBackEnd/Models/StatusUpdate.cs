@@ -6,8 +6,10 @@
         public DateTime UpdateTime { get; set; }
         public string Comment { get; set; }
         public string Status { get; set; }
-        public Image Image { get; set; }
-        public WorkItem WorkItem { get; set; }
+
+        public Image? Image { get; set; }
+
+        public string WorkItemId { get; set; }
 
         public enum WorkStatus
         {
@@ -16,7 +18,6 @@
             Review,
             ChangeRequested,
             Done
-
         }
 
     }

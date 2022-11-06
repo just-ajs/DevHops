@@ -31,7 +31,10 @@ namespace DevHopsBackEnd.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<StatusUpdate>> GetStatusUpdate(string id)
         {
-            var statusUpdate = await _context.StatusUpdates.FindAsync(id);
+            var statusUpdate = await _context.StatusUpdates
+                .Where(s=>s.Equals(id))
+                .Include(s=>s.Image)
+                .FirstOrDefaultAsync();
 
             if (statusUpdate == null)
             {
@@ -77,7 +80,14 @@ namespace DevHopsBackEnd.Controllers
         [HttpPost]
         public async Task<ActionResult<StatusUpdate>> PostStatusUpdate(StatusUpdate statusUpdate)
         {
-            _context.StatusUpdates.Add(statusUpdate);
+
+            var workItem = await _context.WorkItems.FindAsync(statusUpdate.WorkItemId);
+
+            if (workItem == null) return NotFound($"Work Time with Id {statusUpdate.WorkItemId} not found ");
+
+            if (workItem.StatusUpdates == null) workItem.StatusUpdates = new List<StatusUpdate>();;
+            workItem.StatusUpdates.Add(statusUpdate);
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -101,7 +111,11 @@ namespace DevHopsBackEnd.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStatusUpdate(string id)
         {
-            var statusUpdate = await _context.StatusUpdates.FindAsync(id);
+            var statusUpdate = await _context.StatusUpdates
+           .Where(s => s.Equals(id))
+           .Include(s => s.Image)
+           .FirstOrDefaultAsync();
+
             if (statusUpdate == null)
             {
                 return NotFound();
