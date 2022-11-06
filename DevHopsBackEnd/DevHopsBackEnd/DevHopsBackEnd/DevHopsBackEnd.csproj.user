@@ -10,5 +10,6 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>DevHopsBackEnd.Models.DevHopsDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
+    <NameOfLastUsedPublishProfile>C:\Users\mkosicki\source\repos\DevHops\DevHopsBackEnd\DevHopsBackEnd\DevHopsBackEnd\Properties\PublishProfiles\DevHopsBackEnd20221106031035 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

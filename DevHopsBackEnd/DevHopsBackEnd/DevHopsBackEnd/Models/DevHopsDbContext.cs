@@ -11,9 +11,13 @@ namespace DevHopsBackEnd.Models
         public DbSet<StatusUpdate> StatusUpdates { get; set; }
         public DbSet<Image> Images { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+            //modelBuilder.Entity<StatusUpdate>()
+            //    .Property(u => u.WorkStatus)
+            //    .HasConversion<string>()
+            //    .HasMaxLength(50);
         }
 
         //Constructor with DbContextOptions and the context class itself

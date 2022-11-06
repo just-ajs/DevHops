@@ -21,6 +21,7 @@ namespace DevHopsBackEnd.Controllers
         {
             return await _context.WorkItems
                 .Include(w=>w.StatusUpdates)
+                .ThenInclude(s=>s.Image)
                 .ToListAsync();
         }
 
@@ -31,6 +32,7 @@ namespace DevHopsBackEnd.Controllers
             var workItem = await _context.WorkItems
                 .Where(w=>w.WorkItemId.Equals(id))
                 .Include(w=>w.StatusUpdates)
+                .ThenInclude(s => s.Image)
                 .FirstOrDefaultAsync();
 
             if (workItem == null)
