@@ -9,3 +9,13 @@ C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsG
 C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.csproj.CopyComplete
 C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.gha
 C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\obj\Debug\net48\DevHopsGH.pdb
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\RestSharp.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\System.Buffers.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\System.Memory.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\System.Numerics.Vectors.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\System.Text.Encodings.Web.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\System.Text.Json.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\System.Threading.Tasks.Extensions.dll
+C:\Users\jszychowska\source\DevHops\DevHopsGh\DevHopsGH\bin\Debug\net48\System.ValueTuple.dll

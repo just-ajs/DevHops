@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DevHopsBackEnd.Models;
 
@@ -24,14 +19,19 @@ namespace DevHopsBackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<WorkItem>>> GetWorkItems()
         {
-            return await _context.WorkItems.ToListAsync();
+            return await _context.WorkItems
+                .Include(w=>w.StatusUpdates)
+                .ToListAsync();
         }
 
         // GET: api/WorkItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<WorkItem>> GetWorkItem(string id)
         {
-            var workItem = await _context.WorkItems.FindAsync(id);
+            var workItem = await _context.WorkItems
+                .Where(w=>w.WorkItemId.Equals(id))
+                .Include(w=>w.StatusUpdates)
+                .FirstOrDefaultAsync();
 
             if (workItem == null)
             {
@@ -101,7 +101,11 @@ namespace DevHopsBackEnd.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWorkItem(string id)
         {
-            var workItem = await _context.WorkItems.FindAsync(id);
+            var workItem = await _context.WorkItems
+                .Where(w=>w.WorkItemId.Equals(id))
+                .Include(w=>w.StatusUpdates)
+                .FirstOrDefaultAsync();
+
             if (workItem == null)
             {
                 return NotFound();
