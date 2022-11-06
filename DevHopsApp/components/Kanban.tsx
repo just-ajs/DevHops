@@ -81,7 +81,9 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
                 </div>
                 <div className='w-full flex-grow pl-4 pr-4 flex flex-col justify-start items-center'>
                 {lane.cards.map((card, j) => (
-                    <Draggable key={`task-card-${card.id}`} grid={[gridWidth - 4, 1]}>
+                    <Draggable key={`task-card-${card.id}`} grid={[gridWidth - 4, 1]} onStop={(e, d) => {
+                        console.log(Math.round(d.lastX / gridWidth))
+                    }}>
                         <div className='w-full p-4 rounded-md bg-slate shadow-sm'>
                             {card.title}
                         </div>
