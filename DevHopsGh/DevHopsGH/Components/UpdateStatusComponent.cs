@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Grasshopper.Kernel;
 using Newtonsoft.Json;
@@ -113,8 +114,12 @@ namespace DevHopsGH.Components
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                {
+                    var resourceName = assembly.GetManifestResourceNames().Single(n => n.EndsWith("Icon_transparent.png"));
+                    var stream = assembly.GetManifestResourceStream(resourceName);
+                    if (stream != null) return new Bitmap(stream);
+                }
                 return null;
             }
         }

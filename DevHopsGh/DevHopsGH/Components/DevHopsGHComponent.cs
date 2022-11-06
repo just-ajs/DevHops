@@ -3,7 +3,11 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Resources;
+using System.Runtime.Remoting.Messaging;
 using Grasshopper.Kernel.Types;
 using Newtonsoft.Json;
 
@@ -41,7 +45,7 @@ namespace DevHopsGH
             // Use the pManager object to register your output parameters.
             // Output parameters do not have default values, but they too must have the correct access type.
             pManager.AddTextParameter("Task Status", "Status", "Task status", GH_ParamAccess.item);
-            pManager.AddTextParameter("Comments", "Comments", "Task comments", GH_ParamAccess.list);
+            pManager.AddTextParameter("Comments", "Comments", "Task comments", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -61,7 +65,7 @@ namespace DevHopsGH
 
 
             // We should now validate the data and warn the user if invalid data is supplied.
-            if (id.Length < 5)
+            if (id.Length < 1)
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Not a valid task id");
                 return;
@@ -77,21 +81,24 @@ namespace DevHopsGH
             List<Task> tasks = JsonConvert.DeserializeObject<List<Task>>(jsonFile);
             // find id
 
-            Task task = tasks.Find(t => t.id == id);
+            Task task = tasks.Find(t => t.workItemId == id);
             // return status
 
 
 
             // return comments
             string status = task != null ? task.status.ToString() : "empty";
-            List<string> comments = task != null ? task.comments : new List<string> {"no comments"};
 
+            var lastComment = task.statusUpdates[task.statusUpdates.Count - 1].comment;
+            //List<string> comments = task != null ? task.comments : new List<string> {"no comments"};
 
+            var b = new BoardConnector();
+           // var response = b.GetWorkItemById(id);
 
 
             // Finally assign the spiral to the output parameter.
             DA.SetData(0, status);
-            DA.SetDataList(1, comments);
+            DA.SetData(1, lastComment);
         }
 
 
@@ -110,7 +117,19 @@ namespace DevHopsGH
         /// You can add image files to your project resources and access them like this:
         /// return Resources.IconForThisComponent;
         /// </summary>
-        protected override System.Drawing.Bitmap Icon => null;
+        protected override System.Drawing.Bitmap Icon
+        {
+            get
+            {
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                {
+                    var resourceName = assembly.GetManifestResourceNames().Single(n => n.EndsWith("Icon_transparent.png"));
+                    var stream = assembly.GetManifestResourceStream(resourceName);
+                    if (stream != null) return new Bitmap(stream);
+                }
+                return null;
+            }
+        } 
 
         /// <summary>
         /// Each component must have a unique Guid to identify it. 
