@@ -1,21 +1,20 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import type { Task } from '../types'
+import type { WorkItem, WorkItemStatus } from '../types'
 import { useQuery } from '@tanstack/react-query'
-import { fetchTasks } from '../api'
 import Draggable from 'react-draggable';
 
 type KanbanProps = {
-    tasks: Task[]
+    workItems: WorkItem[]
 }
 
-export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
+export const Kanban = ({ workItems }: KanbanProps): React.ReactElement => {
     // const { data, refetch } = useQuery({ queryKey: ['workitem'], queryFn: fetchTasks, initialData: tasks })
 
-    const [data, setData] = useState(tasks)
+    const [data, setData] = useState(workItems)
 
-    const titles: { [key in Task['status']]: string } = {
+    const titles: { [key in WorkItemStatus]: string } = {
         todo: 'TODO',
         inprogress: 'In Progress',
         review: 'In Review',
@@ -23,7 +22,7 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
         done: 'Done'
     }
 
-    const statusKeys: Task['status'][] = [
+    const statusKeys: WorkItemStatus[] = [
         'todo',
         'inprogress',
         'review',
@@ -31,7 +30,7 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
         'done'
     ]
 
-    const groups: { [key in Task['status']]: Card[] } = {
+    const groups: { [key in WorkItemStatus]: WorkItem[] } = {
         todo: [],
         inprogress: [],
         review: [],
@@ -39,9 +38,9 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
         done: []
     }
 
-    data?.forEach((task) => {
-        const { status } = task
-        groups[status].push(taskToCard(task))
+    data?.forEach((workItem) => {
+        const status = getWorkItemStatus(workItem)
+        groups[status].push(workItem)
     })
 
     const laneData = Object.entries(groups).map((([group, cards]) => {
@@ -81,7 +80,7 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
             <div key={`lane-${lane.id}`} className='w-full h-full p-2 flex flex-col bg-medium rounded-sm shadow-md'>
                 <div className='w-full mt-1 mb-2 flex flex-col justify-start items-start'>
                     <div className='w-full flex pr-2 pl-2 justify-between items-center'>
-                        <h2 className='font-sans font-semibold text-md text-slate'>{titles[lane.title  as Task['status']]}</h2>
+                        <h2 className='font-sans font-semibold text-md text-slate'>{titles[lane.title as WorkItemStatus]}</h2>
                         <svg width={14} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#888888" d="M120 256c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm160 0c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm104 56c-30.9 0-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56s-25.1 56-56 56z"/></svg>
                     </div>
                 </div>
@@ -89,7 +88,7 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
                 {lane.cards.map((card, j) => (
                     <Draggable key={`task-card-${card.id}`} grid={[gridWidth - 4, 1]} bounds={{ top: 0 }}  onStop={(e, d) => {
                         const delta = Math.round(d.lastX / gridWidth)
-                        const currentIndex = statusKeys.findIndex((stat) => stat === card.status)
+                        const currentIndex = statusKeys.findIndex((stat) => stat === getWorkItemStatus(card))
                         const nextIndex = currentIndex + delta
 
                         setData((current) => {
@@ -104,7 +103,7 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
                                 return current
                             }
 
-                            copyTask.status = nextStatus
+                            copyTask.statusUpdates[0].status = nextStatus
 
                             return copy
                         })
@@ -127,20 +126,6 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
     )
 }
 
-type Card = {
-    id: string
-    title: string
-    status: Task['status']
-    description: string
-    label: string
-}
-
-const taskToCard = (task: Task): Card => {
-    return {
-        id: task.id.toString(),
-        title: task.title,
-        status: task.status,
-        description: '',
-        label: task.title
-    }
+const getWorkItemStatus = (item: WorkItem): WorkItemStatus => {
+    return item.statusUpdates.find((update) => !!update.status)?.status ?? 'todo'
 }
