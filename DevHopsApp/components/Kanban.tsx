@@ -102,7 +102,7 @@ export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactEle
 }
 
 const getWorkItemStatus = (item: WorkItem): WorkItemStatus => {
-    return item.status ?? item.statusUpdates.find((update) => !!update.status)?.status ?? 'todo'
+    return item.statusUpdates.find((update) => !!update.status)?.status ?? item.status ??  'todo'
 }
 
 const getFirstWorkItemImage = (item: WorkItem): string | null => {
