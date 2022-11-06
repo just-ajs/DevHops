@@ -16,7 +16,6 @@ This project addresses this issue by proposing a workflow where  Grasshopper scr
 | DevHopsGh | Rhino 7 Grasshopper Plugin | Visual Studio 2022 and [Grasshopper template](https://marketplace.visualstudio.com/items?itemName=McNeel.Rhino7Templates)
 | DevHopsGhSamples | Rhino Grasshopper Samples | Rhino 7 Grasshopper
 
-
 ## Getting Started
 ### Grasshopper Plugin (DevHopsGh)
 1. Open in Visual Studio 2022 and build. 
@@ -25,6 +24,7 @@ This project addresses this issue by proposing a workflow where  Grasshopper scr
 ### Backend (DevOpsBackEnd)
 1. Open in Visual Studio 2022 and run in debug mode to deploy the back-end.
 2. The backend will be running to `localhost:5296`.
+3. OpenAPI documentation is available on `http://localhost:5296/swagger`
 
 ### Frontend DevOpsApp
 1. Run the NextJS webapp with `npm run start`
