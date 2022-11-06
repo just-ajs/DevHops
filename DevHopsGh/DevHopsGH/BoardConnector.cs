@@ -15,7 +15,7 @@ namespace DevHopsGH
 
         public string GetWorkItemById(string id)
         {
-            System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(AppConstants.getWorkItemUrl);
+            System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create($"{AppConstants.getWorkItemUrl}{id}");
 
             request.Method = "GET";
             request.Accept = "text/plain";
