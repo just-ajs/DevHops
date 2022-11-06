@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import type { WorkItem, WorkItemStatus, StatusUpdate } from '../types'
 import { useQuery } from '@tanstack/react-query'
 import Draggable from 'react-draggable';
@@ -16,7 +16,20 @@ type KanbanProps = {
 export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactElement => {
     const { data, refetch } = useQuery({ queryKey: ['workitem'], queryFn: fetchWorkItems, initialData: workItems, retry: 1, refetchInterval: 5000, refetchOnMount: false, refetchOnWindowFocus: false })
 
-    // const [data, setData] = useState(workItems)
+    // const isPosted = useRef(false)
+    // useEffect(() => {
+    //     if (data.length < 0 || isPosted.current) {
+    //         return
+    //     }
+
+    //     const requests = data.map((item) => fetch('http://localhost:5296/api/WorkItems', { method: 'POST', body: JSON.stringify(item), headers: { 'Content-Type': 'application/json' } }))
+
+    //     Promise.all(requests)
+
+    //     refetch()
+
+    //     isPosted.current = true
+    // }, [data])
 
     const titles: { [key in WorkItemStatus]: string } = {
         todo: 'TODO',
@@ -66,7 +79,7 @@ export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactEle
     return (
         <>
         {boardData.lanes.map((lane, i) => (
-            <div key={`lane-${lane.id}`} className='w-full h-full p-2 flex flex-col bg-medium rounded-sm shadow-md'>
+            <div key={`lane-${lane.id}`} className='w-full p-2 flex flex-col bg-medium rounded-sm shadow-md'>
                 <div className='w-full mt-1 mb-2 flex flex-col justify-start items-start'>
                     <div className='w-full flex pr-2 pl-2 justify-start items-center'>
                         <StatusDot status={lane.title as any} size="lg" />
@@ -76,12 +89,8 @@ export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactEle
                 </div>
                 <div className='w-full flex-grow flex flex-col justify-start items-center'>
                 {lane.cards.map((item, j) => (
-                    <KanbanCard  key={`task-card-${item.workItemId}`} item={item} gridWidth={gridWidth} onUpdateData={(callback) => {
-                        const newData = callback(data)
-
-                        // Post to API
-
-                        // Refetch
+                    <KanbanCard  key={`task-card-${item.workItemId}`} item={item} gridWidth={gridWidth} onUpdateData={() => {
+                        refetch()
                     }} />
                 ))}
                 </div>
@@ -93,7 +102,7 @@ export const Kanban = ({ workItems, onOpenUpdate }: KanbanProps): React.ReactEle
 }
 
 const getWorkItemStatus = (item: WorkItem): WorkItemStatus => {
-    return item.statusUpdates.find((update) => !!update.status)?.status ?? item.status ?? 'todo'
+    return item.status ?? item.statusUpdates.find((update) => !!update.status)?.status ?? 'todo'
 }
 
 const getFirstWorkItemImage = (item: WorkItem): string | null => {
