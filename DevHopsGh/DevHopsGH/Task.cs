@@ -36,6 +36,6 @@ namespace DevHopsGH
     {
         public string comment { get; set; }
         public string status { get; set; }
-        public string updateTime { get; set; }
+        public DateTime updateTime { get; set; }
     }
 }
