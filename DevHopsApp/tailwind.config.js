@@ -7,10 +7,10 @@ module.exports = {
   ],
   theme: {
     colors: {
-      pale: "#EFF2F2",
       light: "#FCFCFC",
+      medium: "#EBEBEB",
       brand: "#4285F4",
-      slate: "#555555"
+      slate: "#333333"
     },
     fontFamily: {
       'sans': ['Open Sans', 'sans-serif'],
