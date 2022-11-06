@@ -25,21 +25,22 @@ export const Kanban = ({ workItems }: KanbanProps): React.ReactElement => {
     const statusKeys: WorkItemStatus[] = [
         'todo',
         'inprogress',
-        'review',
         'changerequested',
+        'review',
         'done'
     ]
 
     const groups: { [key in WorkItemStatus]: WorkItem[] } = {
         todo: [],
         inprogress: [],
-        review: [],
         changerequested: [],
+        review: [],
         done: []
     }
 
     data?.forEach((workItem) => {
         const status = getWorkItemStatus(workItem)
+        console.log(status)
         groups[status].push(workItem)
     })
 
@@ -69,7 +70,7 @@ export const Kanban = ({ workItems }: KanbanProps): React.ReactElement => {
     return (
         <>
         {boardData.lanes.map((lane, i) => (
-            <div key={`lane-${lane.id}`} className='w-full h-full p-2 flex flex-col bg-medium rounded-sm shadow-md'>
+            <div key={`lane-${lane.id}`} className='w-full p-2 flex flex-col bg-medium rounded-sm shadow-md' style={{ height: 'calc(100vh - 30px)'}}>
                 <div className='w-full mt-1 mb-2 flex flex-col justify-start items-start'>
                     <div className='w-full flex pr-2 pl-2 justify-between items-center'>
                         <h2 className='font-sans font-semibold text-md text-slate'>{titles[lane.title as WorkItemStatus]}</h2>
@@ -78,7 +79,7 @@ export const Kanban = ({ workItems }: KanbanProps): React.ReactElement => {
                 </div>
                 <div className='w-full flex-grow flex flex-col justify-start items-center'>
                 {lane.cards.map((item, j) => (
-                    <Draggable key={`task-card-${item.id}`} grid={[gridWidth - 4, 1]} bounds={{ top: 0 }}  onStop={(e, d) => {
+                    <Draggable key={`task-card-${item.workItemId}`} grid={[gridWidth - 4, 1]} bounds={{ top: 0 }}  onStop={(e, d) => {
                         const delta = Math.round(d.lastX / gridWidth)
                         const currentIndex = statusKeys.findIndex((stat) => stat === getWorkItemStatus(item))
                         const nextIndex = currentIndex + delta
@@ -89,10 +90,15 @@ export const Kanban = ({ workItems }: KanbanProps): React.ReactElement => {
 
                             const copy = [...current]
 
-                            const copyTask = copy.find((t) => t.id.toString() === item.id)
+                            const copyTask = copy.find((t) => t.workItemId === item.workItemId)
 
                             if (!copyTask) {
                                 return current
+                            }
+
+                            if (!copyTask.statusUpdates[0]) {
+                                copyTask.status = nextStatus
+                                return copy
                             }
 
                             copyTask.statusUpdates[0].status = nextStatus
@@ -108,12 +114,12 @@ export const Kanban = ({ workItems }: KanbanProps): React.ReactElement => {
                             </div>
                             <p className='font-sans text-sm text-slate'>{item.description}</p>
                             <div className='w-full mt-2 mb-2 flex justify-start items-center'>
-                                <img src={`/${item.assignee}.png`} width={24} className='rounded-full mr-2' />
+                                <img src={`/${item.assignee.toLowerCase()}.png`} width={24} className='rounded-full mr-2' />
                                 <p className='font-sans text-slate text-xs font-semibold'>{item.assignee}</p>
                             </div>
-                            <div className='w-full h-36 rounded-md bg-medium'>
-                            {getFirstWorkItemImage(item) ? <img src={`data:image/png;base64,${getFirstWorkItemImage(item)}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }}/> : null}
-                            </div>
+                            {!!getFirstWorkItemImage(item) ? (<div className='w-full h-36 rounded-md bg-medium'>
+                            <img src={`data:image/png;base64,${getFirstWorkItemImage(item)}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }}/>
+                            </div>) : null}
                             <div className='w-full flex justify-start items-center'>
                                 <button className='mt-1 p-2 flex justify-start items-center rounded-md hover:bg-medium' onClick={(e) => {
                                     // Show comments
@@ -134,9 +140,9 @@ export const Kanban = ({ workItems }: KanbanProps): React.ReactElement => {
 }
 
 const getWorkItemStatus = (item: WorkItem): WorkItemStatus => {
-    return item.statusUpdates.find((update) => !!update.status)?.status ?? 'todo'
+    return item.statusUpdates.find((update) => !!update.status)?.status ?? item.status ?? 'todo'
 }
 
 const getFirstWorkItemImage = (item: WorkItem): string | null => {
-    return item.statusUpdates.find((update) => !!update.image)?.image ?? null
+    return item.statusUpdates.find((update) => !!update.image)?.image?.imageData ?? null
 }
