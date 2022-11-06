@@ -91,7 +91,7 @@ export const Kanban = ({ tasks }: KanbanProps): React.ReactElement => {
                 </div>
                 <div className='w-full flex-grow pl-4 pr-4 flex flex-col justify-start items-center'>
                 {lane.cards.map((card, j) => (
-                    <Draggable key={`task-card-${card.id}`} grid={[gridWidth - 4, 1]} onStop={(e, d) => {
+                    <Draggable key={`task-card-${card.id}`} grid={[gridWidth - 4, 1]} bounds={{ top: 0 }}  onStop={(e, d) => {
                         const delta = Math.round(d.lastX / gridWidth)
                         const currentIndex = statusKeys.findIndex((stat) => stat === card.status)
                         const nextIndex = currentIndex + delta
