@@ -51,7 +51,7 @@
          "imageTitle": "image.jpeg",
          "imageData": ""
        },
-        "workItemId": "string"
+        "workItemId": "df63e25a-5d79-11ed-9b6a-0242ac120002"
      },
      {
        "statusUpdateId": "de08daf4-5d70-11ed-9b6a-0242ac120001",
@@ -60,7 +60,7 @@
        "status": "ChangeRequested",
        "image": {
        },
-       "workItemId": "string"
+       "workItemId": "df63e25a-5d79-11ed-9b6a-0242ac120002"
      },
      {
       "statusUpdateId": "de08daf4-5d70-11ed-9b6a-0242ac120101",
@@ -72,7 +72,7 @@
         "imageTitle": "image.jpeg",
         "imageData": ""
       },
-      "workItemId": "string"
+      "workItemId": "df63e25a-5d79-11ed-9b6a-0242ac120002"
       },
      {
       "statusUpdateId": "de08daf4-5d70-11ed-9b6a-0242ac120201",
@@ -81,7 +81,7 @@
       "status": "Done",
       "image": {
       },
-      "workItemId": "string"
+      "workItemId": "df63e25a-5d79-11ed-9b6a-0242ac120002"
       }
     ]
   },
