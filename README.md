@@ -30,6 +30,9 @@ This project addresses this issue by proposing a workflow where  Grasshopper scr
 1. Run the NextJS webapp with `npm run start`
 2. The app is hosted on `localhost:3000`.
 
+## Attributions 
+- Image: "Hand drawn psychedelic groovy background" by [Freepik](https://www.freepik.com/free-vector/hand-drawn-psychedelic-groovy-background_12277065.htm#query=groovy%20background%20wallpaper&position=2&from_view=keyword")
+
 ## Contributors
 - [mkosicki](https://github.com/mkosicki)
 - [jkamm](https://github.com/jkamm)
