@@ -36,7 +36,7 @@
   {
     "workItemId": "df63e25a-5d79-11ed-9b6a-0242ac120002",
     "title": "Panelize Surface Scopes",
-    "description": "Generate Panels for Each scope, output path reflecting Scope, Column and Sequence (Bottom to Top)",
+    "description": "Generate Panels for Each scope, output path reflecting Scope, Column and Sequence (Bottom to Top).  Indicate using color scheme",
     "test": "passed",
     "assignee": "Jo",
     "status": "Todo",
